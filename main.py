@@ -1,3 +1,4 @@
+from time import sleep
 import pygame
 
 pygame.init()
@@ -15,12 +16,26 @@ class Background:
     def att(self):
         screen.blit(self.bg, (0, 0))
 
+class Missel:
+    def __init__(self, x=0, y=0):
+        self.x = x
+        self.y = y
+
+        self.img = pygame.image.load('images/missile.png').convert_alpha()
+        self.missel = pygame.transform.scale(self.img, (x / 25, x / 25))
+
+    def shot(self):
+        screen.blit(self.missel, (self.x, self.y))
+
 class Aviao:
     def __init__(self):
         self.x = x/2
         self.y = y/2
+
         self.img = pygame.image.load('images/space.png').convert_alpha()
         self.space = pygame.transform.scale(self.img, (x / 10, x / 10))
+
+        self.missel = Missel()
 
     def sky(self, key):
         if key == pygame.K_RIGHT:
@@ -40,6 +55,7 @@ class Nave:
         self.x = 100
         self.y = 100
         self.flag = True
+
         self.img = pygame.image.load('images/spaceship.png').convert_alpha()
         self.nave = pygame.transform.scale(self.img, (x / 10, x / 10))
 
